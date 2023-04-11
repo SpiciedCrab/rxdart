@@ -144,11 +144,9 @@ abstract class Subject<T> extends StreamView<T> implements StreamController<T> {
   void _add(T event) {
     if (!_controller.isClosed) {
       onAdd(event);
+      _controller.add(event);
     }
 
-    // if the controller is closed, calling add() will throw an StateError.
-    // that is expected behavior.
-    _controller.add(event);
   }
 
   /// An extension point for sub-classes. Perform any side-effect / state
